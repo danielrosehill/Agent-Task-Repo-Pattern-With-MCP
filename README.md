@@ -25,9 +25,13 @@ The **guiding principle** of this approach is what I have learned so far using t
 
 2) The state of **AI code gen in 2025** is highly fluid. Developers (or AI co-developers!) tend to play around with different **LLMs** as they come to market. A **templated logging system** (it can be as simple as "write out a summary of what we did today and where we are up to") becomes highly valuable for facilitating **easy handoff of tasks** between agents backed by completely different LLMs.
 
-"Long context mud" (not a real term but one I will happily coin) comes when AI agents try to do too much at once and IDEs deal them a fatal blow by flooding them with context from the user's code repository. Everybody who has used a code generation AI in the past year has likely witnessed this on countless occasions.
+"Long context mud" (not a real term but one I will happily coin) comes when AI agents try to do too much at once and IDEs deal them a fatal blow by flooding them with context from the user's code repository. 
 
 The result? Inference degrades significantly and the agent becomes almost useless often degrading into (near) GPT-1 cycles of spitting out random or repetitive characters to the user.
+
+This is why even LLMs with huge context windows still (and routinely) fall woefully short when it comes to actual task execution. Unless your frontend has a mechanism for losing trailing context (some do), remediation is futile. Everybody who has used a code generation AI in the past year has likely witnessed this on countless occasions.
+
+As with most things in life, prevention is better than cure. Which is why templating out tasks (while tedious and time consuming) is arguably, and in my view, less tedious and time-consuming than trying to talk a failing agent into doing what you hoped it to do an hour ago.
 
 The tight task definition defined in this template aims to mitigate the potential for that by prescribing not only the task but also the success criteria. The agent gets from A to B and then stops. If there's a follow up, start again.
 
