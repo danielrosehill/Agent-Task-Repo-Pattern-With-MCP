@@ -34,21 +34,9 @@ The **guiding principle** of this approach is what I have learned so far using t
 
 **5**: **Observation and feedback**. 
 
+## Workflow Modeel
 
-```mermaid
-flowchart TD
-    A[1. Human creates task repository] --> B[2. Define task specification]
-    B --> C[3. Version control & review]
-    C --> D[4. AI Agent receives instruction]
-    D --> E[5. Agent executes & logs progress]
-    E --> F{Task complete?}
-    F -->|No| E
-    F -->|Yes| G[Task completed successfully]
-    
-    style A fill:#e1f5fe
-    style G fill:#c8e6c9
-    style E fill:#f3e5f5
-```
+![alt text](workflow.png)
  
 ## Repository Structure
 
