@@ -1,5 +1,7 @@
 # AI Agent Task Repo Pattern - With MCP Definition
 
+![alt text](banner.png)
+
 This repository demonstrates a **structured pattern** for defining specific tasks for **AI agents**, whether deployed on remote servers or local environments. 
 
 The intended use-case here is using **agentic IDE tools** for **systems administration**, **dev-ops** etc: 
