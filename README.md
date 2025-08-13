@@ -1,87 +1,51 @@
 # AI Agent Task Repo Pattern - With MCP Definition
 
-This repository demonstrates a structured pattern for defining specific tasks for AI agents, whether deployed on remote servers or local environments. 
+This repository demonstrates a **structured pattern** for defining specific tasks for **AI agents**, whether deployed on remote servers or local environments. 
 
-The intended use-case here is using agentic IDE tools for systems administration, dev-ops etc: 
+The intended use-case here is using **agentic IDE tools** for **systems administration**, **dev-ops** etc: 
 
-In other words, leveraging chat interfaces like Cascade (by Windsurf) as a communications layer similar to a CLI (ie a chat interface). But rather than having them work on code repos, having the agents work, primarily, on operating on filesystems via executing SSH operations.
+In other words, leveraging chat interfaces like **Cascade** (by Windsurf) as a communications layer similar to a **CLI** (ie a chat interface). But rather than having them work on code repos, having the agents work, primarily, on operating on **filesystems** via executing **SSH operations**.
 
-Defining a repository for each major task you are working on may seem tedious but brings with it many benefits (beyond and including those of robust version control):
+Defining a repository for each major task you are working on may seem tedious but brings with it many **benefits** (beyond and including those of robust version control):
 
-- Context for the project can be gathered into an organised context folder.  
-- Logs can be gathered within the repo. Compared to the traditional approach of gathering 'memories' within a repository, this approach supports collaborative repository work: memories can be aggregated and are not tied to a graph database hosted on any one worksation. 
-- A secrets file (`secrets.md`) does not provide secrets (which of course would be unsafe) but guides the agent on what tools to use in order to access secrets securely, per the user's preferences. This may be as simple as saying ("use .env") or define the CLI that the agent should interact with in order to use a formal secrets store. 
+- **Context** for the project can be gathered into an organised context folder.  
+- **Logs** can be gathered within the repo. Compared to the traditional approach of gathering 'memories' within a repository, this approach supports **collaborative repository work**: memories can be aggregated and are not tied to a graph database hosted on any one workstation. 
+- A **secrets file** (`secrets.md`) does not provide secrets (which of course would be unsafe) but guides the agent on what tools to use in order to access secrets **securely**, per the user's preferences. This may be as simple as saying ("use .env") or define the CLI that the agent should interact with in order to use a **formal secrets store**. 
 
-The guiding principle of this approach is what I have learned so far using tools like Windsurf (et al) almost every day for the past ... year:
+The **guiding principle** of this approach is what I have learned so far using tools like Windsurf (et al) almost every day for the past ... year:
 
-1) Task modularisation is key. Asking agents to execute multi-step tasks is getting easier thanks to innovations like planning support. However, the default position remains that the best results are currently seen when agents execute single well-defined task. This repo template simply aims to embody that in a formal templateable repo pattern. 
+1) **Task modularisation is key**. Asking agents to execute multi-step tasks is getting easier thanks to innovations like planning support. However, the default position remains that the best results are currently seen when agents execute **single well-defined tasks**. This repo template simply aims to embody that in a **formal templateable repo pattern**. 
 
-2) The state of AI code gen in 2025 is highly fluid. Developers (or AI co-developers!) tend to play around with different LLMs as they come to market. A templated logging system (it can be as simple as "write out a summary of what we did today and wher we are up to") becomes highly valuable for facilitating easy handoff of tasks between agents backed by compeltely different LLMs.
+2) The state of **AI code gen in 2025** is highly fluid. Developers (or AI co-developers!) tend to play around with different **LLMs** as they come to market. A **templated logging system** (it can be as simple as "write out a summary of what we did today and where we are up to") becomes highly valuable for facilitating **easy handoff of tasks** between agents backed by completely different LLMs.
 
 ---
 
 ## Intended Use / Workflow
 
-1: The user (human) creates a new task repository and works on a tightly defined spec for the development / sysadmin task. This template can be expanded upon. For example, you may with to include guardrails or filesystem rules or include details about CI/CD processes to be followed.
+**1**: The user (human) creates a **new task repository** and works on a **tightly defined spec** for the development / sysadmin task. This template can be expanded upon. For example, you may wish to include **guardrails** or **filesystem rules** or include details about **CI/CD processes** to be followed.
 
-2: In collaborative workflows, stakeholders can review and approve upon the task definition. 
+**2**: In **collaborative workflows**, stakeholders can **review and approve** upon the task definition. 
 
-3: Task is version controlled (V1). In the organisational context, an organisation may wish to consider aggregating these task definitions into libraries that users can draw down from in order to save time. Users can include notes in the repo about what worked and what didn't enabling continuous improvement processes.
+**3**: Task is **version controlled** (V1). In the organisational context, an organisation may wish to consider aggregating these task definitions into **libraries** that users can draw down from in order to save time. Users can include notes in the repo about what worked and what didn't enabling **continuous improvement processes**.
 
-4: AI agent gets the 'go' instruction. At its most simple level this can be a prompt like: "I have defined a new task for you at /task-repo-path. Please read the instructions carefully and begin working on the project."
+**4**: **AI agent** gets the **'go' instruction**. At its most simple level this can be a prompt like: *"I have defined a new task for you at /task-repo-path. Please read the instructions carefully and begin working on the project."*
 
-5: Observation and feedback. 
+**5**: **Observation and feedback**. 
 
 
 ```mermaid
 flowchart TD
-    A[Human creates new task repository] --> B[Define task specification]
-    B --> C{Collaborative workflow?}
-    C -->|Yes| D[Stakeholder review & approval]
-    C -->|No| E[Version control task definition]
-    D --> E[Version control task definition - V1]
-    
-    E --> F[Optional: Add to organizational task library]
-    F --> G[AI Agent receives 'go' instruction]
-    G --> H[Agent reads task repository]
-    
-    H --> I[Agent validates MCP servers]
-    I --> J{MCP servers available?}
-    J -->|No| K[Request setup assistance]
-    J -->|Yes| L[Begin task execution]
-    
-    K --> J
-    L --> M[Agent logs progress in logs/]
-    M --> N[Execute task components]
-    N --> O{Task complete per success criteria?}
-    
-    O -->|No| P[Continue execution & logging]
-    P --> M
-    O -->|Yes| Q[Final validation with human]
-    Q --> R{Human satisfied?}
-    
-    R -->|No| S[Document feedback & iterate]
-    S --> P
-    R -->|Yes| T[Task completed successfully]
-    
-    T --> U[Update organizational library with lessons learned]
+    A[1. Human creates task repository] --> B[2. Define task specification]
+    B --> C[3. Version control & review]
+    C --> D[4. AI Agent receives instruction]
+    D --> E[5. Agent executes & logs progress]
+    E --> F{Task complete?}
+    F -->|No| E
+    F -->|Yes| G[Task completed successfully]
     
     style A fill:#e1f5fe
-    style T fill:#c8e6c9
-    style K fill:#ffecb3
-    style S fill:#ffecb3
-    
-    classDef humanAction fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef agentAction fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef success fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px
-    classDef warning fill:#ffecb3,stroke:#f57f17,stroke-width:2px
-    
-    class A,D,Q,R,U humanAction
-    class G,H,I,L,M,N agentAction
-    class C,J,O decision
-    class T success
-    class K,S warning
+    style G fill:#c8e6c9
+    style E fill:#f3e5f5
 ```
  
 ## Repository Structure
@@ -139,6 +103,45 @@ The template includes an example NVR (Network Video Recorder) system implementat
 - Real-time status monitoring
 - User interface requirements
 - Remote deployment considerations
+
+---
+
+## Useful MCP Servers for This Pattern
+
+The following **MCP servers** are particularly valuable when implementing this task repository pattern for **systems administration** and **DevOps** work:
+
+### Core Infrastructure MCP Servers
+
+[![SSH MCP Server](https://img.shields.io/badge/SSH-MCP%20Server-blue?style=for-the-badge&logo=ssh)](https://github.com/shaike1/mcp-server-ssh)  
+Essential for **remote server access** and command execution
+
+[![Docker MCP](https://img.shields.io/badge/Docker-MCP-2496ED?style=for-the-badge&logo=docker)](https://github.com/QuantGeekDev/docker-mcp)  
+**Container management** and deployment operations
+
+[![CodeMagic MCP](https://img.shields.io/badge/CodeMagic-MCP-FF6B35?style=for-the-badge)](https://github.com/stefanoamorelli/codemagic-mcp)  
+**CI/CD pipeline** management and automation
+
+### Cloud Infrastructure Management
+
+[![AWS MCP](https://img.shields.io/badge/AWS-MCP-FF9900?style=for-the-badge&logo=amazon-aws)](https://github.com/awslabs/mcp)  
+**Amazon Web Services** infrastructure management
+
+[![Terraform MCP](https://img.shields.io/badge/Terraform-MCP-7B42BC?style=for-the-badge&logo=terraform)](https://github.com/hashicorp/terraform-mcp-server)  
+**Infrastructure as Code** provisioning and management
+
+[![DigitalOcean MCP](https://img.shields.io/badge/DigitalOcean-MCP-0080FF?style=for-the-badge&logo=digitalocean)](https://www.digitalocean.com/community/tutorials/control-apps-using-mcp-server)  
+**DigitalOcean** droplet and service management
+
+[![GCP MCP](https://img.shields.io/badge/Google%20Cloud-MCP-4285F4?style=for-the-badge&logo=google-cloud)](https://github.com/eniayomi/gcp-mcp)  
+**Google Cloud Platform** resource management
+
+### Integration Tips
+
+- **Start with SSH MCP**: Essential for most remote operations
+- **Add Docker MCP**: If working with containerized applications
+- **Include Cloud MCPs**: Based on your infrastructure provider
+- **Test connectivity**: Verify all MCP servers before task execution
+- **Document dependencies**: List required MCPs in your `mcp.md` file
 
 ## Best Practices
 
