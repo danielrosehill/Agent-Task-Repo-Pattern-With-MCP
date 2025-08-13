@@ -34,7 +34,7 @@ The **guiding principle** of this approach is what I have learned so far using t
 
 **5**: **Observation and feedback**. 
 
-## Workflow Modeel
+## Workflow Model
 
 ![alt text](workflow.png)
  
