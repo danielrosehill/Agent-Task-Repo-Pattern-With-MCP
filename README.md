@@ -1,4 +1,4 @@
-# Remote Task Repository Pattern with MCP
+# AI Agent Task Repo Pattern - With MCP Definition
 
 This repository demonstrates a structured pattern for defining specific tasks for AI agents, whether deployed on remote servers or local environments. 
 
