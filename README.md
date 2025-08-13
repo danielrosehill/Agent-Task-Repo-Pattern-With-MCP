@@ -8,17 +8,28 @@ The intended use-case here is using **agentic IDE tools** for **systems administ
 
 In other words, leveraging chat interfaces like **Cascade** (by Windsurf) as a communications layer similar to a **CLI** (ie a chat interface). But rather than having them work on code repos, having the agents work, primarily, on operating on **filesystems** via executing **SSH operations**.
 
+## Why define individual tasks in repos?
+
 Defining a repository for each major task you are working on may seem tedious but brings with it many **benefits** (beyond and including those of robust version control):
 
 - **Context** for the project can be gathered into an organised context folder.  
 - **Logs** can be gathered within the repo. Compared to the traditional approach of gathering 'memories' within a repository, this approach supports **collaborative repository work**: memories can be aggregated and are not tied to a graph database hosted on any one workstation. 
 - A **secrets file** (`secrets.md`) does not provide secrets (which of course would be unsafe) but guides the agent on what tools to use in order to access secrets **securely**, per the user's preferences. This may be as simple as saying ("use .env") or define the CLI that the agent should interact with in order to use a **formal secrets store**. 
 
+## Modularising Tasks To Avoid Long Context Mud
+
+
 The **guiding principle** of this approach is what I have learned so far using tools like Windsurf (et al) almost every day for the past ... year:
 
 1) **Task modularisation is key**. Asking agents to execute multi-step tasks is getting easier thanks to innovations like planning support. However, the default position remains that the best results are currently seen when agents execute **single well-defined tasks**. This repo template simply aims to embody that in a **formal templateable repo pattern**. 
 
 2) The state of **AI code gen in 2025** is highly fluid. Developers (or AI co-developers!) tend to play around with different **LLMs** as they come to market. A **templated logging system** (it can be as simple as "write out a summary of what we did today and where we are up to") becomes highly valuable for facilitating **easy handoff of tasks** between agents backed by completely different LLMs.
+
+"Long context mud" (not a real term but one I will happily coin) comes when AI agents try to do too much at once and IDEs deal them a fatal blow by flooding them with context from the user's code repository. Everybody who has used a code generation AI in the past year has likely witnessed this on countless occasions.
+
+The result? Inference degrades significantly and the agent becomes almost useless often degrading into (near) GPT-1 cycles of spitting out random or repetitive characters to the user.
+
+The tight task definition defined in this template aims to mitigate the potential for that by prescribing not only the task but also the success criteria. The agent gets from A to B and then stops. If there's a follow up, start again.
 
 ---
 
